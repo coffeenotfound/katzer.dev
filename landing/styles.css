@@ -17,6 +17,9 @@ body {
 	align-items: center;
 	justify-content: center;
 	
+	min-width: 240px;
+	min-height: 480px;
+	
 	background: #ffffff;
 	
 	font-family: "Roboto", sans-serif;
