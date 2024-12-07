@@ -18,6 +18,119 @@
 <body>
 	<img class="site-logo" src="favicon-256x256.png"></img>
 	
+	<!--<input type="checkbox" id="darktoggle" style="align-self:flex-start;">-->
+	<div id="darktoggle">
+		<div id="darktoggle_selection"></div>
+		<div id="darktoggle_dark"></div>
+		<div id="darktoggle_light"></div>
+	</div>
+	<style>
+		:root {
+			/* https://easings.net/#easeOutQuart */
+			--ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+			
+			--color-light-gray: hsl(215,15%,85%);
+		}
+		
+		#darktoggle {
+			display: flex;
+			position: absolute;
+			top: 0;
+			left: 0;
+			
+			margin: 1rem;
+			
+			border: 2px solid var(--color-light-gray);
+			border-radius: 12px;
+		}
+		body[darkmode] #darktoggle {
+			border-color: hsl(213.3, 7.6%, 46.7%);
+		}
+		
+		#darktoggle_selection {
+			position: absolute;
+			z-index: -99;
+			
+			margin: 4px;
+			width: 32px;
+			height: 32px;
+			
+			background: hsl(215,15%,90%);
+			/*background: white;*/
+			border-radius: 8px;
+			
+			left: 0px;
+		}
+		body[darkmode] #darktoggle_selection {
+			background: hsl(213.3, 7.6%, 46.7%);
+		}
+		
+		#darktoggle_dark, #darktoggle_light {
+			width: 24px;
+			height: 24px;
+			margin: 8px;
+			
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		body[darkmode] #darktoggle_dark, body[darkmode] #darktoggle_light {
+			filter: invert(1);
+		}
+		
+		#darktoggle_dark {
+			background-image: url("moon.svg");
+			background-repeat: no-repeat;
+			background-position: center center;
+			
+			margin-right: 2px;
+		}
+		#darktoggle_light {
+			background-image: url("sun.svg");
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+	</style>
+	
+	<script>
+		document.getElementById("darktoggle_dark").addEventListener("click", function() {
+			document.cookie = "theme=dark; secure;";
+			updateTheme();
+		});
+		document.getElementById("darktoggle_light").addEventListener("click", function() {
+			document.cookie = "theme=light; secure;";
+			updateTheme();
+		});
+		
+		const darkmodeSelection = document.getElementById("darktoggle_selection");
+		
+		function updateTheme() {
+			if (document.cookie.includes("theme=dark")) {
+				document.body.setAttribute("darkmode", "on");
+				darkmodeSelection.style.left = "0px";
+			} else {
+				document.body.removeAttribute("darkmode");
+				darkmodeSelection.style.left = "34px";
+			}
+		}
+		
+		updateTheme();
+		
+		document.addEventListener("DOMContentLoaded", function() {
+			// Set transition after setting the initial position of the selection
+			updateTheme();
+			
+			// Only add the transition attribute after a small timeout
+			// I couldn't find a better way to avoid 'left' being transitioned
+			// on page load even though I have already set an initial value!
+			setTimeout(function() {
+				document.body.style.transition = "background-color 0.1s var(--ease-out-quart)";
+				darkmodeSelection.style.transition = "left 0.1s var(--ease-out-quart)";
+			}, 500);
+		})
+	</script>
+	
 	<div class="centermsg">
 		<p>Coming soon!</p>
 	</div>

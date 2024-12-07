@@ -24,6 +24,9 @@ body {
 	
 	font-family: "Roboto", sans-serif;
 }
+body[darkmode] {
+	background: #2b313c;
+}
 
 .centermsg {
 	margin: auto;
@@ -31,12 +34,19 @@ body {
 	border: 0.25rem dashed hsl(215,15%,85%);
 	border-radius: 0.5rem;
 }
+body[darkmode] .centermsg {
+	border-color: hsl(216.4, 17.5%, 31.4%);
+}
+
 .centermsg p {
 	margin: 2.5rem 2.6rem;
 	
 	color: #000000;
 	font-size: 1.25rem;
 	font-weight: 700;
+}
+body[darkmode] .centermsg p {
+	color: #ffffff;
 }
 
 .site-logo {
@@ -69,6 +79,10 @@ body {
 	font-family: "Roboto", sans-serif;
 	font-weight: 700;
 }
+body[darkmode] .footer {
+	color: white;
+}
+
 .footer__ruler {
 	display: block;
 	
@@ -106,6 +120,10 @@ body {
 	
 	transition: background 0.1s ease-out, left 0.1s ease-out, width 0.1s ease-out;
 }
+body[darkmode] .footer p a::after {
+	background: hsl(212.3, 14.6%, 34.9%);
+}
+
 .footer p a:hover::after {
 	/*left: calc(0.125rem);
 	width: calc(100% - 2*0.125rem);*/
@@ -113,5 +131,5 @@ body {
 	width: calc(100% - 0rem);
 	
 	/*background: hsl(332,100%,50%);*/
-	background: #ffd40e;
+	background: #ffd40e !important;
 }
